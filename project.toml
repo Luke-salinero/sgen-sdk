@@ -1,0 +1,12 @@
+[project]
+name = "sgen"
+version = "0.1.0"
+description = "SDK for submitting and tracking jobs with sgen"
+authors = [{name = "Brian Klemm"}]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = ["requests"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
