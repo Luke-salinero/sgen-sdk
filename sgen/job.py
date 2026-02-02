@@ -10,7 +10,10 @@ class Job:
 
     def get_status(self) -> dict:
         headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-        resp = requests.get(f"{BASE_URL}/job-status", params={"job_id": self.job_id}, headers=headers)
+        resp = requests.get(
+                f"{BASE_URL}/job-status", 
+                params={"job_id": self.job_id}, 
+                headers=headers,)
         return resp.json()
 
     def get_result(self, poll: bool = True, interval: int = 2, timeout: int = 300):
