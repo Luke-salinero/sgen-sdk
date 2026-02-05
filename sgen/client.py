@@ -3,6 +3,7 @@ import requests
 import os
 import json
 from pathlib import Path
+from typing import Any, Dict
 from .job import Job
 from .token_caching import (
     get_cached_jwt,
@@ -11,10 +12,15 @@ from .token_caching import (
 )
 
 
-BASE_URL = os.getenv("SGEN_API_URL", "https://sgen-api.bigsigma.tech")
+BASE_URL = os.getenv("SGEN_API_URL", "https://sgen-gateway.bigsigma.tech")
 
 def health_check():
     response = requests.get(f"{BASE_URL}/health")
+    print("Calling:", response.url)
+    print("Status:", response.status_code)
+    print("Headers:", response.headers)
+    print("Body:", response.text)
+
     return response.json()
 
 
@@ -52,8 +58,8 @@ def quick_submit(
 ) -> Dict[str, Any]:
 
     # Use cached token if still fresh
-    gateway_base_url: str = "http://127.0.0.1:9000"
-    auth_base_url: str = "http://127.0.0.1:8000"
+    gateway_base_url: str = "http://sgen-gateway.bigsigma.tech"
+    auth_base_url: str = "http://sgen-auth.bigsigma.tech"
     timeout_s: int = 15
     min_ttl_s: int = 30
 
@@ -85,7 +91,10 @@ def quick_submit(
             )
 
     if resp.status_code != 200:
-        print("Server error response:", resp.json())
+        print("Server error status:", resp.status_code)
+        print("Server error headers:", resp.headers)
+        print("Server error body:", resp.text)
+
         resp.raise_for_status()
 
     return resp.json()

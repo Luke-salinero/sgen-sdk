@@ -4,7 +4,6 @@
   "block_size": 3,
   "existential": false,
   "prune_masks": [
-    "0b0000010011",
     "0b0000100101",
     "0b0001001001",
     "0b0010000110",
