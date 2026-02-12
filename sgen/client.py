@@ -3,7 +3,7 @@ import requests
 import os
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from .job import Job
 from .request import gateway_request
 
@@ -68,5 +68,27 @@ def quick_submit(config: Dict[str, Any], api_key: str) -> Dict[str, Any]:
 
     return resp.json()
 
+def results(job_id: str, api_key: str) -> Optional[Dict[str,any]]:
+    resp = gateway_request(
+        method="GET",
+        gateway_base_url="http://sgen-gateway.bigsigma.tech",
+        auth_base_url="http://sgen-auth.bigsigma.tech",
+        api_key=api_key,
+        path=f"/results/{job_id}",
+        json_body=None,
+        timeout_s=15,
+        min_ttl_s=30,
+    )
 
+    if resp.status_code == 200:
+        return resp.json()
+
+    if resp.status_code in (202, 404, 409):
+        return None
+
+    print("Server error status:", resp.status_code)
+    print("Server error headers:", resp.headers)
+    print("Server error body:", resp.text)
+    resp.raise_for_status()
+    return None
 
