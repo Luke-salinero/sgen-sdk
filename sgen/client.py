@@ -1,4 +1,6 @@
 import time
+from sysconfig import expand_makefile_vars
+
 import requests
 import os
 import json
@@ -92,7 +94,10 @@ def results(job_id: str, api_key: str) -> Optional[Dict[str,any]]:
     resp.raise_for_status()
     return None
 
-def status(job_id: str, api_key: str) -> Optional[Dict[str, any]]:
+def status(job_id: str, api_key: str, example_count: int = 1) -> Optional[Dict[str, any]]:
+    if example_count <= 0 or example_count >= 51:
+        return {"error": "Example count must be between 1 and 50"}
+
     resp = gateway_request(
         method="GET",
         gateway_base_url="http://sgen-gateway.bigsigma.tech",
@@ -100,6 +105,7 @@ def status(job_id: str, api_key: str) -> Optional[Dict[str, any]]:
         api_key=api_key,
         path=f"/status/{job_id}",
         json_body=None,
+        params={"example_count": example_count},
         timeout_s=15,
         min_ttl_s=30,
     )

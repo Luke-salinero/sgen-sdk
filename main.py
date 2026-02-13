@@ -14,7 +14,7 @@ job_id = result["job_id"]
 status = sgen.status(job_id=job_id, api_key="YOUR_CLIENT_ID:YOUR_CLIENT_SECRET")
 while status["status"] != "completed":
     time.sleep(5)
-    status = sgen.status(job_id=job_id, api_key="YOUR_CLIENT_ID:YOUR_CLIENT_SECRET")
+    status = sgen.status(job_id=job_id, api_key="YOUR_CLIENT_ID:YOUR_CLIENT_SECRET", example_count=25)
     print(status)
 
 time.sleep(2)
