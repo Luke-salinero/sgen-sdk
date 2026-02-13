@@ -1,5 +1,6 @@
 from .client import (
     results,
+    status,
     quick_submit,
     load_config,
     health_check,
@@ -9,6 +10,7 @@ from .job import Job
 
 __all__ = [
     "results",
+    "status",
     "quick_submit",
     "load_config",
     "health_check",
