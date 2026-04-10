@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sgen"
+version = "0.1.0"
+description = "SDK for submitting and tracking jobs with SGEN"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Brian Klemm" }
+]
+dependencies = [
+  "requests>=2.32.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/bigsigma-tech/sgen-sdk"
+Website = "https://sgen.bigsigma.tech/"
+Documentation = "https://sgen.bigsigma.tech/docs/sgen"
+
+[tool.setuptools]
+packages = ["sgen"]
+include-package-data = false

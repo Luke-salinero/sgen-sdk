@@ -4,9 +4,10 @@ from .client import (
     quick_submit,
     load_config,
     health_check,
-    round_trip_time
+    round_trip_time,
 )
-from .job import Job
+
+__version__ = "0.1.0"
 
 __all__ = [
     "results",
@@ -15,5 +16,4 @@ __all__ = [
     "load_config",
     "health_check",
     "round_trip_time",
-    "Job"
 ]
